@@ -7,7 +7,7 @@ import com.example.data.utils.base.BaseRepository
 import com.example.domain.utils.RemoteErrorEmitter
 import javax.inject.Inject
 
-class NewsRepositoryImpl @Inject constructor(
+class NewsDataSourceImpl @Inject constructor(
     private val newsApi: NewsApi
 ): BaseRepository(), NewsDataSource {
     override suspend fun getNews(
