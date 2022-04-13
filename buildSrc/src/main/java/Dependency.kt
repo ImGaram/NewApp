@@ -15,3 +15,7 @@ object OkHttp {
     const val OKHTTP = "com.squareup.okhttp3:okhttp:4.9.1"
     const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:4.9.1"
 }
+
+object Coroutine {
+    const val COROUTINE = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+}
