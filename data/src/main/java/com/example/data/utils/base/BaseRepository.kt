@@ -11,7 +11,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
 
-class BaseRepository {
+abstract class BaseRepository {
     companion object {
         private const val TAG = "BaseRemoteRepository"
         private const val MESSAGE_KEY = "message"
@@ -24,20 +24,17 @@ class BaseRepository {
      * override suspend fun loginUser(body: LoginUserBody, emitter: RemoteErrorEmitter): LoginUserResponse?  = safeApiCall( { authApi.loginUser(body)} , emitter)
      * @param emitter is the interface that handles the error messages. The error messages must be displayed on the MainThread, or else they would throw an Exception.
      */
-
-    suspend inline fun<T> safeApiCall(emitter: RemoteErrorEmitter, crossinline callFunction: suspend() -> T):T? {
-        return try {
-            val myObject = withContext(Dispatchers.IO) {
-                callFunction.invoke()
-            }
+    suspend inline fun <T> safeApiCall(emitter: RemoteErrorEmitter, crossinline callFunction: suspend () -> T): T? {
+        return try{
+            val myObject = withContext(Dispatchers.IO){ callFunction.invoke() }
             myObject
-        }catch (e: Exception) {
-            withContext(Dispatchers.Main) {
+        }catch (e: Exception){
+            withContext(Dispatchers.Main){
                 e.printStackTrace()
-                Log.e("BaseRemoteRepo", "Call error: ${e.localizedMessage}", e.cause )
-                when(e) {
+                Log.e("BaseRemoteRepo", "Call error: ${e.localizedMessage}", e.cause)
+                when(e){
                     is HttpException -> {
-                        if (e.code() == 401) emitter.onError(ErrorType.SESSION_EXPIRED)
+                        if(e.code() == 401) emitter.onError(ErrorType.SESSION_EXPIRED)
                         else {
                             val body = e.response()?.errorBody()
                             emitter.onError(getErrorMessage(body))
@@ -59,17 +56,16 @@ class BaseRepository {
      * override suspend fun loginUser(body: LoginUserBody, emitter: RemoteErrorEmitter): LoginUserResponse?  = safeApiCall( { authApi.loginUser(body)} , emitter)
      * @param emitter is the interface that handles the error messages. The error messages must be displayed on the MainThread, or else they would throw an Exception.
      */
-
-    inline fun<T> safeApiCallNoContext(emitter: RemoteErrorEmitter, callFunction: () -> T): T? {
-        return try {
+    inline fun <T> safeApiCallNoContext(emitter: RemoteErrorEmitter, callFunction: () -> T): T? {
+        return try{
             val myObject = callFunction.invoke()
             myObject
-        } catch (e: Exception) {
+        }catch (e: Exception){
             e.printStackTrace()
             Log.e("BaseRemoteRepo", "Call error: ${e.localizedMessage}", e.cause)
-            when(e) {
+            when(e){
                 is HttpException -> {
-                    if (e.code() == 401) emitter.onError(ErrorType.SESSION_EXPIRED)
+                    if(e.code() == 401) emitter.onError(ErrorType.SESSION_EXPIRED)
                     else {
                         val body = e.response()?.errorBody()
                         emitter.onError(getErrorMessage(body))
