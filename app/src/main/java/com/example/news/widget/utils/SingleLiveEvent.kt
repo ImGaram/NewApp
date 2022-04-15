@@ -1,4 +1,4 @@
-package com.example.news.utils
+package com.example.news.widget.utils
 
 import android.util.Log
 import androidx.annotation.MainThread
@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 // live data를 observe 로 관찰할 때 불필요한 호출을 줄이기 위한 class
 class SingleLiveEvent<T>: MutableLiveData<T>() {
+
     companion object {
         private const val TAG = "SingleLiveEvent"
     }
@@ -29,8 +30,13 @@ class SingleLiveEvent<T>: MutableLiveData<T>() {
     }
 
     @MainThread
-    override fun setValue(value: T) {
+    override fun setValue(t: T?) {
         mPending.set(true)
-        super.setValue(value)
+        super.setValue(t)
+    }
+
+    @MainThread
+    fun call() {
+        value = null
     }
 }
