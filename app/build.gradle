@@ -51,6 +51,14 @@ dependencies {
     implementation (Retrofit.CONVERTER_GSON)
     implementation (Retrofit.CONVERTER_JAXB)
 
+    // coroutine
+    implementation (Coroutine.COROUTINE)
+
+    // lifecycle
+    implementation (LifeCycle.LIFECYCLE_VIEWMODEL)
+
+    implementation (AndroidX.ACTIVITY)
+
     //okHttp
     implementation (OkHttp.OKHTTP)
     implementation (OkHttp.LOGGING_INTERCEPTOR)

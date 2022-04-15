@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.utils.ErrorType
 import com.example.domain.utils.RemoteErrorEmitter
-import com.example.news.utils.ScreenState
-import com.example.news.utils.SingleLiveEvent
+import com.example.domain.utils.ScreenState
+import com.example.news.widget.utils.SingleLiveEvent
 
 abstract class BaseViewModel: ViewModel(), RemoteErrorEmitter {
     val mutableProgress = MutableLiveData<Int>(View.GONE)
@@ -16,10 +16,10 @@ abstract class BaseViewModel: ViewModel(), RemoteErrorEmitter {
     val mutableErrorType = SingleLiveEvent<ErrorType>()
 
     override fun onError(errorType: ErrorType) {
-        TODO("Not yet implemented")
+        mutableErrorType.postValue(errorType)
     }
 
     override fun onError(msg: String) {
-        TODO("Not yet implemented")
+        mutableErrorMessage.postValue(msg)
     }
 }
