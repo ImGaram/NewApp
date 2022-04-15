@@ -16,6 +16,14 @@ object OkHttp {
     const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:4.9.1"
 }
 
+object AndroidX {
+    const val ACTIVITY = "androidx.activity:activity-ktx:1.1.0"
+}
+
+object LifeCycle {
+    const val LIFECYCLE_VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+}
+
 object Coroutine {
     const val COROUTINE = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
 }
