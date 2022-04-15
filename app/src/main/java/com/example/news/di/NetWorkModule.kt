@@ -1,7 +1,7 @@
 package com.example.news.di
 
 import com.example.data.remote.api.NewsApi
-import com.example.news.widget.utils.Utils.BASE_URL
+import com.example.news.utils.Utils.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,7 +49,7 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideGithubApiService(retrofit: Retrofit): NewsApi {
+    fun provideNewsApiService(retrofit: Retrofit): NewsApi {
         return retrofit.create(NewsApi::class.java)
     }
 

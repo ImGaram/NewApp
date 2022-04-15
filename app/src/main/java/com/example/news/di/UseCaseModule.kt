@@ -1,7 +1,7 @@
 package com.example.news.di
 
 import com.example.domain.repository.NewsRepository
-import com.example.domain.usecase.GetUserRepoUseCase
+import com.example.domain.usecase.GetNewsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +15,5 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideGetUserRepoUseCase(repository: NewsRepository) = GetUserRepoUseCase(repository)
+    fun provideGetUserRepoUseCase(repository: NewsRepository) = GetNewsUseCase(repository)
 }
