@@ -57,7 +57,11 @@ dependencies {
     // lifecycle
     implementation (LifeCycle.LIFECYCLE_VIEWMODEL)
 
+    // activity
     implementation (AndroidX.ACTIVITY)
+
+    // glide
+    implementation (Glide.GLIDE)
 
     //okHttp
     implementation (OkHttp.OKHTTP)
