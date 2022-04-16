@@ -25,6 +25,7 @@ object NetWorkModule {
             .readTimeout(10, TimeUnit.SECONDS)
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
             .addInterceptor(getLoggingInterceptor())
             .build()
     }
