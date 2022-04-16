@@ -19,20 +19,24 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun init() {
         binding.activity = this
+        binding.textViewTodayDate.text = mainViewModel.apiCallResult.publishedAt
         observeViewModel()
         mainViewModel.getNewsRepo("709b04335e404b30a64045caf1d2dfde")
     }
 
     private fun initRecyclerView() {
         binding.recyclerviewNews.adapter = NewsRecyclerViewAdapter(mainViewModel)
-        binding.recyclerviewNews.layoutManager = LinearLayoutManager(this)
+        binding.recyclerviewNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun observeViewModel() {
         mainViewModel.apiCallEvent.observe(this) {
             Log.d("로그", "$it")
             when (it) {
-                ScreenState.LOADING -> shortToast("성공!")
+                ScreenState.LOADING -> {
+                    shortToast("성공!")
+                    Log.d("로그", "${mainViewModel.apiCallResult}")
+                }
                 ScreenState.ERROR -> toastErrorMsg()
                 else -> shortToast("알 수 없는 에러 발생!")
             }
