@@ -3,10 +3,10 @@ package com.example.data.remote.model
 import com.google.gson.annotations.SerializedName
 
 data class DataNewsResponse(
-    @SerializedName("author") var author: String?,
-    @SerializedName("title") var title: String?,
-    @SerializedName("description") var description: String?,
-    @SerializedName("url") var url: String?,
-    @SerializedName("urlToImage") var urlToImage: String?,
-    @SerializedName("publishedAt") var publishedAt: String?
+    @SerializedName("author") var _author: String,
+    @SerializedName("title") var _title: String,
+    @SerializedName("description") var _description: String,
+    @SerializedName("url") var _url: String,
+    @SerializedName("urlToImage") var _urlToImage: String,
+    @SerializedName("publishedAt") var _publishedAt: String
 )
