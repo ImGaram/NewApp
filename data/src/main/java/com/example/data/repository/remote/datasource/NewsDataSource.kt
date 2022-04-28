@@ -1,8 +1,10 @@
 package com.example.data.repository.remote.datasource
 
 import com.example.data.remote.model.DataNewsResponse
-import com.example.domain.utils.RemoteErrorEmitter
+import io.reactivex.rxjava3.core.Single
 
 interface NewsDataSource {
-    suspend fun getNews(remoteErrorEmitter: RemoteErrorEmitter, apiKey: String): DataNewsResponse?
+    suspend fun getNews(
+        apiKey: String
+    ): List<DataNewsResponse>
 }
