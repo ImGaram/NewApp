@@ -1,14 +1,17 @@
 package com.example.news.di
 
+import android.app.Application
 import com.example.data.remote.api.NewsApi
 import com.example.news.utils.Utils.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -20,13 +23,21 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideHttpClient(): OkHttpClient {
+    fun provideCache(application: Application): Cache {
+        return Cache(application.cacheDir, 10L * 1024 * 1024)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(cache: Cache): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(10, TimeUnit.SECONDS)
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
-            .retryOnConnectionFailure(true)
-            .addInterceptor(getLoggingInterceptor())
+            .cache(cache)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
             .build()
     }
 
@@ -37,7 +48,7 @@ object NetWorkModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .client(provideHttpClient())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(gsonConverterFactory)
             .build()
     }
@@ -52,9 +63,5 @@ object NetWorkModule {
     @Singleton
     fun provideNewsApiService(retrofit: Retrofit): NewsApi {
         return retrofit.create(NewsApi::class.java)
-    }
-
-    private fun getLoggingInterceptor(): HttpLoggingInterceptor =HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
     }
 }
