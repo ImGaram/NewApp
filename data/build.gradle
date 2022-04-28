@@ -40,6 +40,11 @@ dependencies {
     implementation (DaggerHilt.DAGGER_HILT_VIEW_MODEL)
     kapt (DaggerHilt.DAGGER_HILT_ANDROIDX_COMPILER)
 
+    // rx
+    implementation (Rx.RXJAVA)
+    implementation (Rx.RXANDROID)
+    implementation (Rx.RXKOTLIN)
+
     // Retrofit
     implementation (Retrofit.RETROFIT)
     implementation (Retrofit.CONVERTER_GSON)
@@ -51,6 +56,7 @@ dependencies {
 
     implementation (Coroutine.COROUTINE)
 
+    implementation 'com.google.android.gms:play-services-tasks:18.0.1'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'

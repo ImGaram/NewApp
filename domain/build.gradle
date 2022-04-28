@@ -43,9 +43,16 @@ dependencies {
     implementation (Retrofit.CONVERTER_GSON)
     implementation (Retrofit.CONVERTER_JAXB)
 
+    // rx
+    implementation (Rx.RXJAVA)
+    implementation (Rx.RXANDROID)
+    implementation (Rx.RXKOTLIN)
+
     //okHttp
     implementation (OkHttp.OKHTTP)
     implementation (OkHttp.LOGGING_INTERCEPTOR)
+
+    implementation (Coroutine.COROUTINE)
 
     implementation 'com.google.android.gms:play-services-tasks:18.0.1'
     implementation 'androidx.core:core-ktx:1.7.0'

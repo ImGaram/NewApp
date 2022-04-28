@@ -11,6 +11,13 @@ object Retrofit {
     const val CONVERTER_JAXB = "com.squareup.retrofit2:converter-jaxb:2.9.0"
 }
 
+object Rx {
+    const val RXJAVA = "io.reactivex.rxjava3:rxjava:3.0.6"
+    const val RXKOTLIN = "io.reactivex.rxjava3:rxkotlin:3.0.0"
+    const val ADAPTER = "com.squareup.retrofit2:adapter-rxjava3:2.9.0"
+    const val RXANDROID = "io.reactivex.rxjava3:rxandroid:3.0.0"
+}
+
 object OkHttp {
     const val OKHTTP = "com.squareup.okhttp3:okhttp:4.9.1"
     const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:4.9.1"

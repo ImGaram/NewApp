@@ -51,6 +51,12 @@ dependencies {
     implementation (Retrofit.CONVERTER_GSON)
     implementation (Retrofit.CONVERTER_JAXB)
 
+    // rx
+    implementation (Rx.RXJAVA)
+    implementation (Rx.RXANDROID)
+    implementation (Rx.ADAPTER)
+    implementation (Rx.RXKOTLIN)
+
     // coroutine
     implementation (Coroutine.COROUTINE)
 
