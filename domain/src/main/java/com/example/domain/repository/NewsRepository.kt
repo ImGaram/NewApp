@@ -1,11 +1,10 @@
 package com.example.domain.repository
 
 import com.example.domain.model.DomainNewsResponse
-import com.example.domain.utils.RemoteErrorEmitter
+import io.reactivex.rxjava3.core.Single
 
 interface NewsRepository {
     suspend fun getNews(
-        remoteErrorEmitter: RemoteErrorEmitter,
-        apiKey: String)
-    : DomainNewsResponse?
+        apiKey: String
+    ): List<DomainNewsResponse>
 }
