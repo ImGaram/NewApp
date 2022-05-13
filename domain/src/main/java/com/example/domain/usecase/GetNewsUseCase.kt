@@ -1,6 +1,7 @@
 package com.example.domain.usecase
 
 import com.example.domain.model.DomainNewsResponse
+import com.example.domain.model.DomainNewsResponseFirst
 import com.example.domain.repository.NewsRepository
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +17,7 @@ class GetNewsUseCase @Inject constructor(
     operator fun invoke(
         apiKey: String,
         scope: CoroutineScope,
-        onResult: (List<DomainNewsResponse>) -> Unit = {}
+        onResult: (DomainNewsResponseFirst?) -> Unit = {}
     ) {
         scope.launch(Dispatchers.Main) {
             val deferred = async(Dispatchers.IO) {
@@ -25,5 +26,4 @@ class GetNewsUseCase @Inject constructor(
             onResult(deferred.await())
         }
     }
-    suspend fun execute(apiKey: String) = newsRepository.getNews(apiKey)
 }
