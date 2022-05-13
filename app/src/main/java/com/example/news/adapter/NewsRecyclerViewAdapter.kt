@@ -37,12 +37,12 @@ class NewsRecyclerViewAdapter: RecyclerView.Adapter<NewsRecyclerViewAdapter.News
         private val binding: NewsRecyclerItemBinding
         ): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DomainNewsResponse) {
-            binding.textViewPublishedAt.text = data.publishedAt
-            binding.textViewTitle.text = data.title
-            binding.textViewAuthor.text = data.author
-            Glide.with(App.getInstance())
-                .load(data.urlToImage)
-                .into(binding.imageViewUriToImage)
+//            binding.textViewPublishedAt.text = data.publishedAt
+//            binding.textViewTitle.text = data.title
+//            binding.textViewAuthor.text = data.author
+//            Glide.with(App.getInstance())
+//                .load(data.urlToImage)
+//                .into(binding.imageViewUriToImage)
         }
     }
 }

@@ -15,7 +15,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun init() {
         binding.activity = this
-        binding.textViewTodayDate.text = mainViewModel.apiCallResult.publishedAt
+//        binding.textViewTodayDate.text = mainViewModel.apiCallResult.publishedAt
         mainViewModel.getNews("709b04335e404b30a64045caf1d2dfde")
         subscribeToLiveData()
     }
@@ -23,7 +23,6 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private fun subscribeToLiveData() {
         mainViewModel.news.observe(this) {
             Log.d("성공", "$it")
-            (binding.recyclerviewNews.adapter as NewsRecyclerViewAdapter).setNews(it)
         }
     }
 }
