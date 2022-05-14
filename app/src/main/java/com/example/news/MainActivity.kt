@@ -22,7 +22,7 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun subscribeToLiveData() {
         mainViewModel.news.observe(this) {
-            Log.d("성공", "$it")
+            Log.d("성공", "${it.articles}")
         }
     }
 }
