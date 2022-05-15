@@ -3,6 +3,7 @@ package com.example.news
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.DomainNewsResponse
 import com.example.news.adapter.NewsRecyclerViewAdapter
 import com.example.news.base.BaseActivity
 import com.example.news.databinding.ActivityMainBinding
@@ -22,7 +23,14 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun subscribeToLiveData() {
         mainViewModel.news.observe(this) {
-            Log.d("성공", "${it.articles}")
+            (binding.recyclerviewNews.adapter as NewsRecyclerViewAdapter?)?.setNews(mainViewModel.apiCallResult.value!!)
+            Log.d("성공", "subscribeToLiveData mainViewModel.apiCallResult: ${mainViewModel.apiCallResult.value}")
+            initRecycler()
         }
+    }
+
+    private fun initRecycler() {
+        binding.recyclerviewNews.adapter = NewsRecyclerViewAdapter()
+        binding.recyclerviewNews.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 }
