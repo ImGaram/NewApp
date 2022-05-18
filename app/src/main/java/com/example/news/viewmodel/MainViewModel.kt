@@ -9,6 +9,8 @@ import com.example.domain.model.DomainNewsResponseFirst
 import com.example.domain.usecase.GetNewsUseCase
 import com.example.news.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import org.json.JSONArray
+import org.json.JSONObject
 import javax.inject.Inject
 
 // UseCase를 Hilt를 이용해 주입받아 사용
@@ -16,16 +18,18 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase
 ): BaseViewModel() {
+
     private val _news = MutableLiveData<DomainNewsResponseFirst>()
     val news: LiveData<DomainNewsResponseFirst> = _news
 
-    private val _apiCallResult = MutableLiveData<List<DomainNewsResponse>>()
-    var apiCallResult: LiveData<List<DomainNewsResponse>> = _apiCallResult
+    var apiCallResult = arrayListOf<DomainNewsResponse>()
 
     fun getNews(apiKey: String) {
         getNewsUseCase(apiKey, viewModelScope) {
             _news.value = it
-            _apiCallResult.value = it!!.articles
+//            Log.d("SUCCESS", "getNews: ${_news.value}")
+            val jsonArray = JSONArray(it?.articles)
+            Log.d("SUCCESS", "getNews: $jsonArray")
         }
     }
 }
