@@ -8,6 +8,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
+import retrofit2.Response
 import javax.inject.Inject
 
 // repository를 hilt를 이용해 주입받아 하나의 하나의 세부적인 기능을 선언한다
