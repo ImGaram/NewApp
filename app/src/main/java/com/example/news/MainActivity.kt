@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.model.DomainNewsResponse
+import com.example.domain.model.DomainNewsResponseFirst
 import com.example.news.adapter.NewsRecyclerViewAdapter
 import com.example.news.base.BaseActivity
 import com.example.news.databinding.ActivityMainBinding
@@ -13,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val mainViewModel by viewModels<MainViewModel>()
+    private val list = mutableListOf<DomainNewsResponse>()
 
     override fun init() {
         binding.activity = this
@@ -21,11 +23,20 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun subscribeToLiveData() {
-        mainViewModel.news.observe(this) {
-//            (binding.recyclerviewNews.adapter as NewsRecyclerViewAdapter?)?.setNews(mainViewModel.news.value!!)
-            Log.d("성공", "subscribeToLiveData mainViewModel.apiCallResult: ${mainViewModel.news.value}")
+        mainViewModel.apiCallResult.observe(this) {
+            Log.d("성공", "subscribeToLiveData mainViewModel.apiCallResult: $it")
+            initData(it, list)
             initRecycler()
         }
+    }
+
+    private fun initData(data: DomainNewsResponseFirst, list: MutableList<DomainNewsResponse>) {
+        list.clear()
+        for (i in 0 until data.totalResults) {
+            list.add(data.articles[i])
+            Log.d("DATA", "index $i: ${data.articles[i]}")
+        }
+        (binding.recyclerviewNews.adapter as NewsRecyclerViewAdapter?)?.setNews(list)
     }
 
     private fun initRecycler() {
