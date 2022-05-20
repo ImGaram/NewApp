@@ -5,6 +5,8 @@ import com.example.data.repository.remote.datasource.NewsDataSource
 import com.example.domain.model.DomainNewsResponse
 import com.example.domain.model.DomainNewsResponseFirst
 import com.example.domain.repository.NewsRepository
+import okhttp3.ResponseBody
+import retrofit2.Response
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
