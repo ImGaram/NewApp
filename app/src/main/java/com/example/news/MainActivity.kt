@@ -31,11 +31,11 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initData(data: DomainNewsResponseFirst, list: MutableList<DomainNewsResponse>) {
-        list.clear()
-        for (i in 0 until data.totalResults) {
+        Log.d("RESULT", "total results: ${data.totalResults}")
+        for (i:Int in 0 until 20) {
             list.add(data.articles[i])
-            Log.d("DATA", "index $i: ${data.articles[i]}")
         }
+        Log.d("LLLL", "list: $list")
         (binding.recyclerviewNews.adapter as NewsRecyclerViewAdapter?)?.setNews(list)
     }
 
