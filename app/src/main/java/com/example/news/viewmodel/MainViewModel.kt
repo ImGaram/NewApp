@@ -21,8 +21,8 @@ class MainViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase
 ): BaseViewModel() {
 
-    private val _news = MutableLiveData<List<DomainNewsResponse>>()
-    val news: LiveData<List<DomainNewsResponse>> = _news
+//    private val _news = MutableLiveData<List<DomainNewsResponse>>()
+//    val news: LiveData<List<DomainNewsResponse>> = _news
 
     private val _apiCallResult = MutableLiveData<DomainNewsResponseFirst>()
     val apiCallResult: LiveData<DomainNewsResponseFirst> = _apiCallResult
@@ -30,7 +30,7 @@ class MainViewModel @Inject constructor(
     fun getNews(apiKey: String) {
         getNewsUseCase(apiKey, viewModelScope) {
             _apiCallResult.value = it
-            _news.value = _apiCallResult.value?.articles
+//            _news.value = _apiCallResult.value?.articles
         }
     }
 }
