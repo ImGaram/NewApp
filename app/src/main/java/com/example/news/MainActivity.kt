@@ -26,7 +26,6 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         mainViewModel.apiCallResult.observe(this) {
             Log.d("성공", "subscribeToLiveData mainViewModel.apiCallResult: $it")
             initData(it, list)
-            initRecycler()
         }
     }
 
@@ -35,8 +34,8 @@ class MainActivity: BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         for (i:Int in 0 until 20) {
             list.add(data.articles[i])
         }
-        Log.d("LLLL", "list: $list")
         (binding.recyclerviewNews.adapter as NewsRecyclerViewAdapter?)?.setNews(list)
+        initRecycler()
     }
 
     private fun initRecycler() {
