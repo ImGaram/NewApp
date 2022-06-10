@@ -1,7 +1,6 @@
 package com.example.news.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,27 +9,19 @@ import com.example.domain.model.DomainNewsResponse
 import com.example.news.databinding.NewsRecyclerItemBinding
 import com.example.news.di.App
 
-class NewsRecyclerViewAdapter: RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsRecyclerViewHolder>() {
-
-    private var news = mutableListOf<DomainNewsResponse>()
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setNews(items: MutableList<DomainNewsResponse>) {
-        this.news.clear()
-        this.news.addAll(items)
-        notifyDataSetChanged()
-    }
+class NewsRecyclerViewAdapter(val newsList: List<DomainNewsResponse>):
+    RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsRecyclerViewHolder {
         return NewsRecyclerViewHolder(NewsRecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: NewsRecyclerViewHolder, position: Int) {
-        holder.bind(news[position])
+        holder.bind(newsList[position])
     }
 
     override fun getItemCount(): Int {
-        return news.size
+        return newsList.size
     }
 
     inner class NewsRecyclerViewHolder(
@@ -40,6 +31,7 @@ class NewsRecyclerViewAdapter: RecyclerView.Adapter<NewsRecyclerViewAdapter.News
             binding.textViewPublishedAt.text = data._publishedAt
             binding.textViewTitle.text = data._title
             binding.textViewAuthor.text = data._author
+            binding.textViewDescription.text = data._description
             Glide.with(App.getInstance())
                 .load(data._urlToImage)
                 .into(binding.imageViewUriToImage)
