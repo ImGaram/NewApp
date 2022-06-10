@@ -1,12 +1,9 @@
 package com.example.data.repository.remote
 
-import com.example.data.mapper.Mapper
 import com.example.data.repository.remote.datasource.NewsDataSource
+import com.example.domain.model.DomainNewsAllResponse
 import com.example.domain.model.DomainNewsResponse
-import com.example.domain.model.DomainNewsResponseFirst
 import com.example.domain.repository.NewsRepository
-import okhttp3.ResponseBody
-import retrofit2.Response
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
@@ -14,7 +11,7 @@ class NewsRepositoryImpl @Inject constructor(
 ): NewsRepository {
     override suspend fun getNews(
         apiKey: String
-    ): DomainNewsResponseFirst? {
-        return Mapper.mapperNewsFirst(newsDataSource.getNews(apiKey))
+    ): DomainNewsAllResponse? {
+        return newsDataSource.getNews(apiKey)
     }
 }

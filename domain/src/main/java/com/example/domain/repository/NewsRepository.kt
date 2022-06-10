@@ -1,11 +1,9 @@
 package com.example.domain.repository
 
-import com.example.domain.model.DomainNewsResponseFirst
-import okhttp3.ResponseBody
-import retrofit2.Response
+import com.example.domain.model.DomainNewsAllResponse
 
 interface NewsRepository {
     suspend fun getNews(
         apiKey: String
-    ): DomainNewsResponseFirst?
+    ): DomainNewsAllResponse?
 }
