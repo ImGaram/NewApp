@@ -15,10 +15,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase
 ): BaseViewModel() {
-
-//    private val _news = MutableLiveData<List<DomainNewsResponse>>()
-//    val news: LiveData<List<DomainNewsResponse>> = _news
-
     private val _apiCallResult = MutableLiveData<DomainNewsAllResponse>()
     val apiCallResult: LiveData<DomainNewsAllResponse> = _apiCallResult
 
