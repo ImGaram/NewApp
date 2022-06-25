@@ -55,7 +55,7 @@
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="#BF00E2FF"
+            android:background="#00E2FF"
             app:itemTextColor="@drawable/bottom_icon_color"
             app:itemIconTint="@drawable/bottom_icon_color"
             app:menu="@menu/main_menu" />
