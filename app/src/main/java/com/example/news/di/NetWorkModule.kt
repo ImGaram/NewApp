@@ -2,7 +2,9 @@ package com.example.news.di
 
 import android.app.Application
 import com.example.data.remote.api.NewsApi
+import com.example.data.remote.api.WeatherApi
 import com.example.news.utils.Utils.BASE_URL
+import com.example.news.utils.Utils.WEATHER_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 // hilt 로 retrofit 관련 의존성 주입
@@ -40,13 +43,28 @@ object NetWorkModule {
             })
             .build()
     }
-
+    @Named("news")
     @Provides
     @Singleton
     fun provideRetrofitInstance(
         okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+    }
+
+    @Named("weather")
+    @Provides
+    @Singleton
+    fun provideWeatherRetrofitInstance(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(WEATHER_BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(gsonConverterFactory)
@@ -61,7 +79,13 @@ object NetWorkModule {
 
     @Provides
     @Singleton
-    fun provideNewsApiService(retrofit: Retrofit): NewsApi {
+    fun provideNewsApiService(@Named("news") retrofit: Retrofit): NewsApi {
         return retrofit.create(NewsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherApi(@Named("weather") retrofit: Retrofit): WeatherApi {
+        return retrofit.create(WeatherApi::class.java)
     }
 }
