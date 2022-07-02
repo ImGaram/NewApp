@@ -10,7 +10,7 @@ interface MainWeatherApi {
     @GET("/data/2.5/weather")
     suspend fun getMainWeather(
         @Query("lat") lat: Double,
-        @Query("lon") lot: Double,
+        @Query("lon") lon: Double,
         @Query("appid") key: String
     ): Response<MainWeatherResponse>
 }
