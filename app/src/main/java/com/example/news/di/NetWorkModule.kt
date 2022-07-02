@@ -1,6 +1,7 @@
 package com.example.news.di
 
 import android.app.Application
+import com.example.data.remote.api.MainWeatherApi
 import com.example.data.remote.api.NewsApi
 import com.example.data.remote.api.WeatherApi
 import com.example.news.utils.Utils.BASE_URL
@@ -71,6 +72,21 @@ object NetWorkModule {
             .build()
     }
 
+    @Named("MainWeather")
+    @Provides
+    @Singleton
+    fun provideMainWeatherRetrofitInstance(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(WEATHER_BASE_URL)
+            .client(okHttpClient)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+    }
+
     @Provides
     @Singleton
     fun provideConverterFactory(): GsonConverterFactory {
@@ -87,5 +103,11 @@ object NetWorkModule {
     @Singleton
     fun provideWeatherApi(@Named("weather") retrofit: Retrofit): WeatherApi {
         return retrofit.create(WeatherApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherMainApi(@Named("MainWeather") retrofit: Retrofit): MainWeatherApi {
+        return retrofit.create(MainWeatherApi::class.java)
     }
 }
