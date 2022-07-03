@@ -12,12 +12,12 @@ import com.example.domain.model.weather.main.DomainMainWeatherResponse
 import com.google.gson.annotations.SerializedName
 
 data class MainWeatherResponse(
-    @SerializedName("weather") val _weather: Weather2Response,
+    @SerializedName("weather") val _weather: List<Weather2Response>,
     @SerializedName("main") val _main: WeatherMainResponse,
     @SerializedName("wind") val _wind: WeatherWindResponse,
     @SerializedName("clouds") val _cloud: WeatherCloudResponse
 ): DomainMainWeatherResponse {
-    override val weather: DomainWeather2Response
+    override val weather: List<DomainWeather2Response>
         get() = _weather
     override val main: DomainWeatherMainResponse
         get() = _main

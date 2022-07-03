@@ -6,7 +6,7 @@ import com.example.domain.model.weather.DomainWeatherMainResponse
 import com.example.domain.model.weather.DomainWeatherWindResponse
 
 interface DomainMainWeatherResponse {
-    val weather: DomainWeather2Response
+    val weather: List<DomainWeather2Response>
     val main: DomainWeatherMainResponse
     val wind: DomainWeatherWindResponse
     val cloud: DomainWeatherCloudResponse
